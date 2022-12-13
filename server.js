@@ -1,13 +1,16 @@
-const PORT = process.env.PORT || 3001;
 const express = require('express');
+
 const app = express();
+const PORT = 3001;
 
 const notes = require('./db/db');
 
-app.get('/api/notes', (req, res => {
-    res.json(notes);
-}))
+app.use(express.static('public'));
 
-app.listen(3001, () =>
-  console.log('Server listening on port 3001!'),
-);
+app.get('/api/notes', (req, res) => {
+    res.json(notes);
+});
+
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}!`);
+});
