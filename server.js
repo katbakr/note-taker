@@ -16,9 +16,13 @@ app.get("/api/notes", (req, res) => {
   res.json(notes.slice(1));
 });
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "./public/index.html"));
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "./public/index.html"));
+// });
+app.get("/notes", (req,res) => {
+  res.sendFile(path.join(__dirname, "./public/notes.html"))
+})
+
 // * all
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./public/index.html"));
@@ -49,7 +53,7 @@ function makeNewNote(body, noteArray) {
 app.post("/api/notes", (req, res) => {
   // console.log(req.body);
   // res.json(req.body);
-  req.body.id = notes.length.toString();
+  // req.body.id = notes.length.toString();
   //unique ID
   const newNote = makeNewNote(req.body, notes);
 
