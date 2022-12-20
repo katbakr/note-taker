@@ -1,41 +1,63 @@
 const PORT = process.env.PORT || 3001
-const express = require('express');
+
 const fs = require('fs');
 const path = require('path');
-
+const express = require('express');
 const app = express();
 // const PORT = 3001;
 
-const notes = require('./db/db');
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 app.use(express.static('public')); 
+
+const notes = require('./db/db.json');
+
+app.get('/api/notes', (req,res) => {
+  res.json(notes);
+});
+
+app.get('/', (req,res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+app.get('*', (req,res) => {
+  res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
  function makeNewNote(body, noteArray) {
    const newNote = body;
    noteArray.push(newNote);
    fs.writeFileSync(
      path.join(__dirname, './db/db.json'),
-     JSON.stringify({ notes: noteArray}, null, 2),
-    
+    //  JSON.stringify({ notes: noteArray}, null, 2),
+    JSON.stringify(notes, null, 2),
    );
    return newNote;
- } 
+ };
 
-app.get('/api/notes', (req, res) => {
-    res.json(notes);
-});
+// app.get('/api/notes', (req, res) => {
+//     res.json(notes);
+// });
 
 app.post('/api/notes', (req, res) => {
   // console.log(req.body);
   // res.json(req.body);
   req.body.id = notes.length.toString();
 //unique ID 
-  const NewNote = makeNewNote(req.body, notes);
+  const newNote = makeNewNote(req.body, notes);
 
   res.json(newNote);
-})
+});
+
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, './public/index.html'));
+// });
+
+// app.get('/notes', (req, res) => {
+//   res.sendFile(path.join(__dirname, './public/notes.html'));
+// })
 
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}!`);
