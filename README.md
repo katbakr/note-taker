@@ -25,7 +25,7 @@
   To use this app, you will need to navigate from the landing page to the notes page by clicking the "Get Started" button. This will bring you to your notes storage area. In here, you can use the right collumn to add a title and note data to a note, and press the save button in the upper right corner to save the note. Once saved, the note will appear on the left collumn with all other saved notes. Notes can be easily deleted using the red garbage can button. Careful using that though because those notes cannot be recovered!
   
   ## Deployed
-  Check out my deployed application using Heroku here! [Note Taker](https://wk11-note-taker2.herokuapp.com/)
+  Check out my deployed application using Heroku here! [Click Here](https://wk11-note-taker2.herokuapp.com/)
   ## Questions
   If you have an questions about this project please reach out using my contacts below! Feel free to leave an issue in my GitHub repository for future development ideas or neccessary bug fixes. 
   GitHub: https://github.com/kat.bakr
